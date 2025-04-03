@@ -1,20 +1,7 @@
-import React, { useEffect, useRef } from "react";
-import { StyleSheet, Text, View, Animated } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import SplashScreen from "@/screens/SplashScreen";
+import React from "react";
 
-const SplashScreen = () => {
-  return (
-    <View>
-      <Text>SplashScreen</Text>
-    </View>
-  );
+const index = () => {
+  return <SplashScreen />;
 };
-
-export default SplashScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "green",
-  },
-});
+export default index;
