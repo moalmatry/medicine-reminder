@@ -10,7 +10,7 @@ import { useRouter } from "expo-router";
 import * as LocalAuthentication from "expo-local-authentication";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import { Colors } from "@/constants/Colors";
+import { Colors } from "@/constants";
 
 const width = Dimensions.get("window").width;
 

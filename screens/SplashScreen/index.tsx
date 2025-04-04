@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { StyleSheet, Text, View, Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "@/constants/Colors";
+import { Colors } from "@/constants";
 import { useRouter } from "expo-router";
 
 const SplashScreen = () => {
@@ -25,7 +25,7 @@ const SplashScreen = () => {
     ]).start();
 
     const timer = setTimeout(() => {
-      router.replace("/auth");
+      router.replace("/home");
     }, 3000);
 
     return () => clearTimeout(timer);
