@@ -6,7 +6,6 @@ import personReducer from "./features/person/person-slice";
 
 import addFormReducer from "./features/add-form/add-form-slice";
 import inputErrorReducer from "./features/input-error/input-error-slice";
-
 export const store = configureStore({
   reducer: {
     counter: counterReducer,

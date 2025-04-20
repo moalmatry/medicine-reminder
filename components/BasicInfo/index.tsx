@@ -1,63 +1,74 @@
-import { updateForm } from "@/store/features/add-form/add-form-slice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
+import { AddMedicationInput } from "@/validators/addMedication.schema";
 import React, { useState } from "react";
+import { Control, FieldErrors } from "react-hook-form";
 import { StyleSheet, Text, View } from "react-native";
 import Calender from "../Calender";
 import DurationsOptions from "../DurationsOptions";
 import FrequencyOptions from "../FrequencyOptions";
-import { updateInputError } from "@/store/features/input-error/input-error-slice";
 import TextInput from "../ui/TextInput";
+interface BasicInfoProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<AddMedicationInput, any, AddMedicationInput>;
+  errors: FieldErrors<AddMedicationInput>;
+}
 
-const BasicInfo = () => {
+const BasicInfo = ({ control, errors }: BasicInfoProps) => {
   const [selectedFrequency, setSelectedFrequency] = useState("");
+  const [selectedDuration, setSelectedDuration] = useState("");
+  const [showTimePicker, setShowTimePicker] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
   const form = useAppSelector((state) => state.addForm);
-  const inputError = useAppSelector((state) => state.inputError);
   const dispatch = useAppDispatch();
 
   return (
     <View style={styles.section}>
-      <TextInput
-        name="name"
-        error={inputError}
-        placeholder="Medication Name"
-        placeholderTextColor="#999"
-        value={form.name}
-        onChangeText={(text) => {
-          dispatch(updateForm({ name: text }));
-        }}
-      />
+      <View style={styles.inputsContainer}>
+        <TextInput
+          name="medicationName"
+          error={errors.medicationName?.message}
+          control={control}
+          placeholder="Medication Name"
+          placeholderTextColor="#999"
+          value={form.name}
+        />
 
-      <TextInput
-        name="dosage"
-        error={inputError}
-        placeholder="Dosage (500mg)"
-        placeholderTextColor="#999"
-        value={form.dosage}
-        onChangeText={(text) => {
-          dispatch(updateForm({ dosage: text }));
-        }}
-      />
+        <TextInput
+          name="dosage"
+          control={control}
+          placeholder="Dosage (500mg)"
+          placeholderTextColor="#999"
+          value={form.dosage}
+        />
+      </View>
       <View style={styles.container}>
         <Text style={styles.sectionTitle}>How often?</Text>
-        {inputError.frequency && (
+        {/* {inputError.frequency && (
           <Text style={styles.errorText}>{inputError.frequency}</Text>
-        )}
+        )} */}
         {/* render frequency options */}
         <FrequencyOptions
-          onFrequencySelect={() => selectedFrequency}
-          selected={selectedFrequency}
+          setSelectedFrequency={setSelectedFrequency}
+          selectedFrequency={selectedFrequency}
         />
         <Text style={styles.sectionTitle}>For how long?</Text>
-        {inputError.duration && (
+        {/* {errors.duration && (
           <Text style={styles.errorText}>{inputError.duration}</Text>
-        )}
+        )} */}
 
         {/* render durations options */}
-        {/* NOTE: 03:43 styling option grid */}
-        <DurationsOptions />
+        <DurationsOptions
+          setSelectedDuration={setSelectedDuration}
+          selectedDuration={selectedDuration}
+        />
 
         {/* Calender */}
-        <Calender />
+        <Calender
+          setShowTimePicker={setShowTimePicker}
+          showTimePicker={showTimePicker}
+          showDatePicker={showDatePicker}
+          setShowDatePicker={setShowDatePicker}
+        />
       </View>
     </View>
   );
@@ -68,7 +79,10 @@ export default BasicInfo;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f9fa",
+    // backgroundColor: "#f8f9fa",
+  },
+  inputsContainer: {
+    gap: 6,
   },
   section: {
     marginBottom: 25,

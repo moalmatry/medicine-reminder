@@ -1,13 +1,18 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import { ScrollView } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from "@expo/vector-icons";
-import { Colors } from "@/constants";
 import CircularProgress from "@/components/CircularProgress";
+import NotificationModal from "@/components/NotificationModal";
 import QuickActions from "@/components/QuickActions";
 import TodayMedication from "@/components/TodayMedication";
-import NotificationModal from "@/components/NotificationModal";
+import { Colors } from "@/constants";
+import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const HomeScreen = () => {
   return (

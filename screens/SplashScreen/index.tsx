@@ -41,7 +41,16 @@ const SplashScreen = () => {
           },
         ]}
       >
-        <Ionicons name="medical" size={100} color="white" />
+        <Ionicons
+          style={{
+            backgroundColor: "#357a38",
+            padding: 20,
+            borderRadius: 100,
+          }}
+          name="medical"
+          size={100}
+          color="white"
+        />
         <Text style={styles.appName}>MedRemind</Text>
       </Animated.View>
     </View>

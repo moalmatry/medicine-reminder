@@ -1,11 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 
 const AddScreenHeader = () => {
+  const router = useRouter();
   return (
     <View style={styles.header}>
-      <TouchableOpacity style={styles.backButton}>
+      <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
         <Ionicons name="chevron-back" size={28} color="#1a8e2d" />
       </TouchableOpacity>
       <Text style={styles.headerTitle}>New Medication</Text>
@@ -20,6 +22,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 20,
     zIndex: 1,
+    paddingTop: "5%",
   },
   backButton: {
     width: 40,

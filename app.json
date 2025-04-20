@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.moalmatry.medicinereminder"
     },
     "web": {
       "bundler": "metro",
@@ -30,6 +31,9 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "android": {
+      "package": "com.moalmatry.medicinereminder"
     }
   }
 }

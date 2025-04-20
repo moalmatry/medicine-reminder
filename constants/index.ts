@@ -103,3 +103,16 @@ export const DURATIONS = [
   { id: "4", label: "90 days", value: 90 },
   { id: "5", label: "Ongoing", value: -1 },
 ];
+
+export const RANDOM_COLORS = [
+  "#4CAF40",
+  "#2196f3",
+  "#FF9800",
+  "#E91E63",
+  "#9C27B0",
+];
+
+// NOTE: Keys for local storage
+
+export const MEDICATION_KEY = "@medication";
+export const DOSE_HISTORY_KEY = "@dose_history";

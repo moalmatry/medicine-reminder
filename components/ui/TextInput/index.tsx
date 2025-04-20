@@ -1,58 +1,62 @@
+import React from "react";
+import { Control, Controller } from "react-hook-form";
 import {
-  StyleSheet,
-  Text,
-  View,
+  KeyboardTypeOptions,
   TextInput as RnTextInput,
   StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
   ViewStyle,
 } from "react-native";
-import React from "react";
 
 interface TextInputProps {
   placeholder: string;
   placeholderTextColor: string;
   value: string;
-  onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
-  error?: any;
+  error?: string;
   name: string;
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<TextStyle>;
   containerStyle?: StyleProp<ViewStyle>;
+  keyboardType?: KeyboardTypeOptions;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  control: Control<any>;
 }
 
 const TextInput = ({
   placeholder,
   placeholderTextColor,
-  value,
-  onChangeText,
   secureTextEntry,
   name,
   error,
   containerStyle,
   style,
+  keyboardType,
+  control,
 }: TextInputProps) => {
   return (
-    <View style={[styles.inputContainer, containerStyle]}>
-      <RnTextInput
-        secureTextEntry={secureTextEntry}
-        style={[
-          styles.mainInput,
-          style,
-          error && error[name] && styles.inputError,
-        ]}
-        placeholder={placeholder}
-        placeholderTextColor={placeholderTextColor}
-        value={value}
-        onChangeText={(text) => {
-          onChangeText(text);
-          if (error & error[name]) {
-            error[name] = "";
-          }
-        }}
-      />
-      {error && error[name] && (
-        <Text style={styles.errorText}>{error[name]}</Text>
-      )}
+    <View style={styles.container}>
+      {error && <Text style={styles.errorText}>{error}</Text>}
+      <View style={[styles.inputContainer, containerStyle]}>
+        <Controller
+          name={name}
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <RnTextInput
+              secureTextEntry={secureTextEntry}
+              style={[styles.mainInput, style, error && styles.inputError]}
+              keyboardType={keyboardType}
+              placeholder={placeholder}
+              placeholderTextColor={placeholderTextColor}
+              value={value}
+              onBlur={onBlur}
+              onChangeText={onChange}
+            />
+          )}
+        />
+      </View>
     </View>
   );
 };
@@ -60,10 +64,12 @@ const TextInput = ({
 export default TextInput;
 
 const styles = StyleSheet.create({
+  container: {
+    gap: 4,
+  },
   inputContainer: {
     backgroundColor: "white",
     borderRadius: 16,
-    marginBottom: 12,
     borderWidth: 1,
     borderColor: "#e0e0e0",
     shadowColor: "#000000",

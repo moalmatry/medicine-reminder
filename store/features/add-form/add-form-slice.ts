@@ -5,7 +5,7 @@ export interface AddForm {
   dosage: string;
   frequency: string;
   duration: string;
-  startDate: Date;
+  startDate: number;
   times: string[];
   notes: string;
   reminderEnabled: boolean;
@@ -19,7 +19,8 @@ const initialState: AddForm = {
   dosage: "",
   frequency: "",
   duration: "",
-  startDate: new Date(),
+  // NOTE: we covert the date to milliseconds because when we store date in redux it returns that error A non-serializable
+  startDate: new Date().getTime(),
   times: ["09:00"],
   notes: "",
   reminderEnabled: true,
