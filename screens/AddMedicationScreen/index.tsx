@@ -62,7 +62,7 @@ const AddMedicationScreen = () => {
         [
           {
             text: "OK",
-            // onPress: () => router.back(),
+            onPress: () => router.back(),
           },
         ],
         { cancelable: false }

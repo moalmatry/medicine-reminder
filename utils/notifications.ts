@@ -63,10 +63,10 @@ export const scheduleMedicationReminder = async (medication: Medications) => {
           data: { medicationId: medication.id },
         },
         trigger: {
-          type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
+          type: Notifications.SchedulableTriggerInputTypes.DAILY,
           hour: hours,
           minute: minutes,
-          repeats: true,
+          // repeats: true,
         },
       });
       return identifier;
